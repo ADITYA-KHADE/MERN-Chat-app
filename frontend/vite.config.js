@@ -6,6 +6,10 @@ export default defineConfig({
   plugins: [react()],
   server: {
     host: '0.0.0.0', // Allows access from network devices
-    port: 5173,      // Specify the port (default is 3000)
-  }
+    port: 5173,
+    proxy:
+    {
+      '/api': 'http://localhost:8000'
+    }   
+  },
 })

@@ -1,5 +1,5 @@
 const express = require("express");
-const app = express();
+// const app = express();
 const dotenv = require("dotenv");
 const cors = require("cors");
 const cookieParser=require("cookie-parser")
@@ -9,6 +9,8 @@ const PORT = process.env.PORT || 5000 ;
 
 const mongodb=require("./config/connectdb");
 mongodb();
+
+const{ app, server } = require("./sockets.io/socket");
 
 app.use(cors());
 app.use(cookieParser());
@@ -31,7 +33,7 @@ app.get("/", (req, res) => {
 );
 
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`Example app listening at http://localhost:${PORT}`);
     }
 );

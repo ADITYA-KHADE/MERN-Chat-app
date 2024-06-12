@@ -1,27 +1,23 @@
-import React from 'react'
-import Conversation from "./Conversation"
+import React from "react";
+import Conversation from "./Conversation";
 import "../../App.css";
+import useGetConversations from "../../Hooks/useGetConversations";
 
 const Conversations = () => {
+  const { conversations, loading } = useGetConversations();
   return (
-    <div className="py-2 flex flex-col overflow-auto hide-scrollbar">
-        <Conversation />
-        <Conversation />
-        <Conversation />
-        <Conversation />
-        <Conversation />
-        <Conversation />
-        <Conversation />
-        <Conversation />
-        <Conversation />
-        <Conversation />
-        <Conversation />
-        <Conversation />
-        <Conversation />
-        <Conversation />
-        <Conversation />
-    </div>
-  )
-}
+    <div className='py-2 flex flex-col overflow-auto hide-scrollbar'>
+			{conversations.map((conversation, idx) => (
+				<Conversation
+					key={conversation._id}
+					conversation={conversation}
+					lastIdx={idx === conversations.length - 1}
+				/>
+			))}
 
-export default Conversations
+			{loading ? <span className='loading loading-spinner mx-auto'></span> : null}
+		</div>
+  );
+};
+
+export default Conversations;

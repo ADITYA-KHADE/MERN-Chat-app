@@ -7,7 +7,6 @@ const authTokenGenerate=require("../utility/authToken.js")
 const signup =async(req, res) => {
     try {
        const {fullname,username,password,confirmpassword,gender}=req.body;
-
        if(password!==confirmpassword){
             return res.status(400).json({message:"Password does not match"})
        }
@@ -20,11 +19,16 @@ const signup =async(req, res) => {
          const salt=await bcrypt.genSalt(10);
         const hashpassword=await bcrypt.hash(password,salt);
 
+        
+        const pic=`${gender==="male" ? "https://avatar.iran.liara.run/public/boy" :"https://avatar.iran.liara.run/public/girl"}`;
+        
+
         const newUser =new User({
               fullname,
               username,
               password:hashpassword,
               gender,
+              photo:pic
         })
 
         await newUser.save();
@@ -33,6 +37,7 @@ const signup =async(req, res) => {
             res.status(201).json({
                 _id:newUser._id,
                 username:newUser.username,
+                photo:newUser.photo,
                 message:"User registered successfully"})
         }else{
             res.status(400).json({message:"User not registered"})
@@ -57,7 +62,12 @@ const login = async(req, res) => {
             return res.status(400).json({message:"Invalid credentials"})
         }
         authTokenGenerate(user._id,res);
-        res.status(200).json({message:"User logged in successfully"})
+        res.status(200).json({
+            _id:user._id,
+            username:user.username,
+            fullname:user.fullname,
+            photo:user.photo,
+            message:"User logged in successfully"})
     } catch (error) {
         res.status(500).send(error.message)
         console.log(error.message)
