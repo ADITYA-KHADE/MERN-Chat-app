@@ -9,8 +9,8 @@ export default defineConfig({
     port: 5173,
     proxy:
     {
-      // '/api': 'http://localhost:8000'
-      '/api': 'https://mern-chat-app-9alu.onrender.com'
+      '/api': 'http://localhost:8000'
+      // '/api': 'https://mern-chat-app-9alu.onrender.com'
     }   
   },
 })
