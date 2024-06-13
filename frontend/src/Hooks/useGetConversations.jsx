@@ -8,18 +8,17 @@ const useGetConversations = () => {
 
   useEffect(() => {
     const getconversation = async () => {
-      try {<picture>
-        <source media="(min-width: )" srcset="" />
-        <img src="" alt="" />
-      </picture>
-        setLoading(true);
-        const res = await fetch("/api/users");
+      setLoading(true);
+      try {
+        const res = await fetch("/api/users/all");
         const data = await res.json();
         if (data.error) {
+          console.log(data.error);
           throw new Error(data.error);
         }
         setConversations(data);
       } catch (error) {
+        console.log(error);
         toast.error(error.message);
       }
 

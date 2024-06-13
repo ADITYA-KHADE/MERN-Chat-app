@@ -3,5 +3,5 @@ const router = express.Router()
 const checkToken=require("../middleware/checkToken")
 const getUserBySidebar=require("../controller/user.controller")
 
-router.get('/',checkToken,getUserBySidebar);
+router.get('/all',checkToken,getUserBySidebar);
 module.exports = router
