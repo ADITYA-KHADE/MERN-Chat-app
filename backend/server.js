@@ -1,7 +1,7 @@
 const express = require("express");
 // const app = express();
 const dotenv = require("dotenv");
-const cors = require("cors");
+
 const cookieParser = require("cookie-parser");
 const { app, server } = require("./sockets.io/socket");
 
@@ -14,7 +14,6 @@ const PORT = process.env.PORT || 5000;
 const mongodb = require("./config/connectdb");
 mongodb();
 
-app.use(cors());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
